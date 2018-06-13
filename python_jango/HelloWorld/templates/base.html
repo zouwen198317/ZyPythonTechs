@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基类模板</title>
+</head>
+<body>
+<h1>Hello World!</h1>
+<p>菜鸟教程 Django 测试。</p>
+{% block mainbody %}
+<p>original</p>
+{% endblock %}
+
+{# 名为 mainbody 的 block 标签是可以被继承者们替换掉的部分。#}
+{# 所有的 {% block %} 标签告诉模板引擎，子模板可以重载这些部分。#}
+</body>
+</html>
