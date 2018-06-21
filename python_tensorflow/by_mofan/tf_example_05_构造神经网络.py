@@ -84,6 +84,7 @@ loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indice
 # learning_rate 学习效率有多高,这个值通常是要小于1的
 # minimize减少误差
 # 第一个的训练都是通过优化器去减小误差
+# GradientDescentOptimizer 最基础的线性优化器
 train_step = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(loss)
 
 # 初始化所有的变量
