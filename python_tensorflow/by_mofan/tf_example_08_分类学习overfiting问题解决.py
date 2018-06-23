@@ -8,6 +8,11 @@ from sklearn.model_selection import train_test_split
 """
 dropout 解决 overfiting问题: 
 dropout是指在深度学习网络的训练过程中，对于神经网络单元，按照一定的概率将其暂时从网络中丢弃
+
+
+过拟合 (Overfitting)
+
+视频资料: https://morvanzhou.github.io/tutorials/machine-learning/tensorflow/5-02-A-overfitting/
 """
 
 # load data
