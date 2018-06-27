@@ -1,3 +1,6 @@
+from scipy.interpolate import BarycentricInterpolator
+from tensorflow.contrib.kfac.examples.mlp import opt
+
 import common_header
 
 import numpy as np
@@ -14,6 +17,14 @@ def fx(x):
     # i = (x==0)
     # y[i]=1
     return y
+
+
+def poisson(param):
+    pass
+
+
+def residual(t, x, y):
+    return y - (t[0] * x ** 2 + t[1] * x + t[2])
 
 
 if __name__ == '__main__':
@@ -310,6 +321,7 @@ if __name__ == '__main__':
 
     print("\n---------------------------\n")
     print("\n---------------------------\n")
+
     # 5.绘图
     # 5.1 绘制正态分布概率密度函数
     mpl.rcParams['font.sans-serif'] = [u'SimHei']  # FangSong/黑体 FangSong/KaiTi
@@ -325,10 +337,11 @@ if __name__ == '__main__':
     # plt.plot(x,y,'ro-',linewidth=2)
     plt.plot(x, y, 'r-', x, y, 'go', linewidth=2, markersize=8)
     plt.grid(True)
+    plt.close('all')
     # plt.show()
-    plt.close()
+
     print("\n---------------------------\n")
-# 5.2 损失函数：Logistic损失(-1,1)/SVM Hinge损失/ 0/1损失
+    # 5.2 损失函数：Logistic损失(-1,1)/SVM Hinge损失/ 0/1损失
     x = np.array(np.linspace(start=-2, stop=3, num=1001, dtype=np.float))
     y_logit = np.log(1 + np.exp(-x)) / math.log(2)
     y_boost = np.exp(-x)
@@ -342,8 +355,8 @@ if __name__ == '__main__':
     plt.grid()
     plt.legend(loc='upper right')
     plt.savefig('1.png')
+    plt.close('all')
     # plt.show()
-    plt.close()
 
     # 5.3 x^x
     x = np.linspace(-1.3, 1.3, 101)
@@ -351,5 +364,222 @@ if __name__ == '__main__':
     plt.plot(x, y, 'g-', label='x^x', linewidth=2)
     plt.grid()
     plt.legend(loc='upper left')
+    plt.close('all')
+    # plt.show()
+
+    # 5.4 胸型线
+    x = np.arange(1, 0, -0.001)
+    y = (-3 * x * np.log(x) + np.exp(-(40 * (x - 1 / np.e)) ** 4) / 25) / 2
+    plt.figure(figsize=(5, 7))
+    plt.plot(y, x, 'r-', linewidth=2)
+    plt.grid(True)
+    plt.close('all')
+    # plt.show()
+
+    # 5.5 心形线
+    t = np.linspace(0, 7, 100)
+    x = 16 * np.sin(t) ** 3
+    y = 13 * np.cos(t) - 5 * np.cos(2 * t) - 2 * np.cos(3 * t) - np.cos(4 * t)
+    plt.plot(y, x, 'r-', linewidth=2)
+    plt.grid(True)
+    plt.close('all')  # 清除所有的数据设置
+    # plt.show()
+
+    # 5.6 渐开线
+    t = np.linspace(0, 50, num=1000)
+    x = t * np.sin(t) + np.cos(t)
+    y = np.sin(t) - t * np.cos(t)
+    plt.plot(y, x, 'r-', linewidth=2)
+    plt.grid(True)
+    # plt.show()
+    plt.close('all')
+
+    # Bar
+    mpl.rcParams['font.sans-serif'] = [u'SimHei']  # 黑体 FangSong/KaiTi
+    mpl.rcParams['axes.unicode_minus'] = False
+    x = np.arange(0, 10, 0.1)
+    y = np.sin(x)
+    plt.bar(x, y, width=0.04, linewidth=0.2)
+    plt.plot(x, y, 'r--', linewidth=0.2)
+    plt.title(u'Sin曲线')
+    plt.xticks(rotation=-60)
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.grid()
+    # plt.show()
+    plt.close('all')
+
+    '''
+
+    '''
+    print("\n---------------------------\n")
+    print("\n---------------------------\n")
+
+    # 6. 概率分布
+    # 6.1 均匀分布
+    x = np.random.rand(10000)
+    t = np.arange(len(x))
+    plt.hist(x, 30, color='m', alpha=0.5)
+    # plt.plot(t, x, 'r-', label=u'均匀分布')
+    plt.legend(loc='upper list')
+    plt.grid()
+    # plt.show()
+    plt.close('all')
+
+    # 6.2 验证中心极限定理
+    t = 10000
+    a = np.zeros(1000)
+    for i in range(t):
+        a += np.random.uniform(-5, 5, 1000)
+    a /= t
+    plt.hist(a, bins=30, color='g', alpha=0.5, normed=True)
+    plt.grid()
+    # plt.show()
+    plt.close('all')
+
+    # 6.3 Poisson分布
+    x = np.random.poisson(lam=5, size=10000)
+    print(x)
+    pillar = 15
+    a = plt.hist(x, bins=pillar, normed=True, range=[0, pillar], color='g', alpha=0.5)
+    plt.grid()
+    # plt.show()
+    print(a)
+    print(a[0].sum())
+    plt.close('all')
+
+    # 6.4 直方图
+    from scipy.stats import norm
+    import scipy
+
+    mu = 2
+    sigma = 3
+    data = mu + sigma * np.random.randn(1000)
+    h = plt.hist(data, 30, normed=1, color='#a0a0ff')
+    x = h[1]
+    y = norm.pdf(x, loc=mu, scale=sigma)
+    a = plt.plot(x, y, 'r--', x, y, 'ro', linewidth=2, markersize=4)
+    plt.grid()
+    # plt.show()
+    plt.close('all')
+
+    '''
+
+    '''
+    print("\n---------------------------\n")
+    print("\n---------------------------\n")
+    # 7. 绘制三维图像
+    from mpl_toolkits.mplot3d import Axes3D  # 绘制3D坐标的函数
+
+    fig1 = plt.figure()  # 创建一个绘图对象
+    ax = Axes3D(fig1)  # 用这个绘图对象创建一个Axes对象(有3D坐标)
+    fig2 = plt.figure()  # 创建一个绘图对象
+    ax = Axes3D(fig2)  # 用这个绘图对象创建一个Axes对象(有3D坐标)
+    # plt.show()  # 显示模块中的所有绘图对象
+    plt.close('all')
+
+    # ------------ 资料地址 https://blog.csdn.net/shu15121856/article/category/6832194  ------------
+    # 散点图使用scatter
+    # 生成3D示例数据
+    mu_vec1 = np.array([0, 0, 0])  # 均值向量
+    cov_mat1 = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])  # 协方差矩阵
+    class1_sample = np.random.multivariate_normal(mu_vec1, cov_mat1, 20)
+    class2_sample = np.random.multivariate_normal(mu_vec1 + 1, cov_mat1, 20)
+    class3_sample = np.random.multivariate_normal(mu_vec1 + 2, cov_mat1, 20)
+    # class1_sample.shape -> (20, 3), 20 rows, 3 columns
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.scatter(class1_sample[:, 0], class1_sample[:, 1], class1_sample[:, 2],
+               marker='x', color='blue', s=40, label='class 1')
+    ax.scatter(class2_sample[:, 0], class2_sample[:, 1], class2_sample[:, 2],
+               marker='o', color='green', s=40, label='class 2')
+    ax.scatter(class3_sample[:, 0], class3_sample[:, 1], class3_sample[:, 2],
+               marker='^', color='red', s=40, label='class 3')
+    ax.set_xlabel('variable X')
+    ax.set_ylabel('variable Y')
+    ax.set_zlabel('variable Z')
+    plt.title('3D Scatter Plot')
+    # plt.show()
+    plt.close('all')
+
+    # 直线使用plot3D
+    from mpl_toolkits.mplot3d import Axes3D
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from itertools import product, combinations
+
+    fig = plt.figure(figsize=(7, 7))
+    ax = fig.gca(projection='3d')
+    ax.set_aspect("equal")
+
+    # 画点
+    # 立方体里的点
+    X_inside = np.array([[0, 0, 0], [0.2, 0.2, 0.2], [0.1, -0.1, -0.3]])
+    X_outside = np.array([[-1.2, 0.3, -0.3], [0.8, -0.82, -0.9], [1, 0.6, -0.7],
+                          [0.8, 0.7, 0.2], [0.7, -0.8, -0.45], [-0.3, 0.6, 0.9],
+                          [0.7, -0.6, -0.8]])
+    for row in X_inside:
+        ax.scatter(row[0], row[1], row[2], color="r", s=50, marker='^')
+
+    for row in X_outside:
+        ax.scatter(row[0], row[1], row[2], color="k", s=50)
+
+    # 画立方体
+    h = [-0.5, 0.5]
+    for s, e in combinations(np.array(list(product(h, h, h))), 2):
+        if np.sum(np.abs(s - e)) == h[1] - h[0]:
+            ax.plot3D(*zip(s, e), color="g")
+
+    ax.set_xlim(-1.5, 1.5)
+    ax.set_ylim(-1.5, 1.5)
+    ax.set_zlim(-1.5, 1.5)
+    # plt.show()
+    plt.close('all')
+
+    # ------------ 资料地址 https://blog.csdn.net/shu15121856/article/category/6832194  ------------
+    '''
+
+    '''
+    print("\n---------------------------\n")
+    print("\n---------------------------\n")
+    # 8.1 scipy
+    # 线性回归例1
+    import matplotlib.pyplot as plt
+    from scipy.optimize import leastsq
+
+    x = np.linspace(-2, 2, 50)
+    print("x = ", x)
+    A, B, C = 2, 3, -1
+    y = (A * x ** 2 + B * x + C) + np.random.rand(len(x)) * 0.75
+    print("y = ", y)
+    t = leastsq(residual, [0, 0, 0], args=(x, y))
+    theta = t[0]
+    print("真实值:", A, B, C)
+    print("预测值:", theta)
+    y_hat = theta[0] * x ** 2 + theta[1] * x + theta[2]
+    plt.plot(x, y, 'r-', linewidth=2, label=u'Actual')
+    plt.plot(x, y_hat, 'g-', linewidth=2, label=u'Predict')
+    plt.legend(loc='upper left')
+    plt.grid()
+    # plt.show()
+    plt.close('all')
+
+    # 线性回归2
+    x = np.linspace(0, 5, 100)
+    A = 5
+    w = 1.5
+    y = A * np.sin(w * x) + np.random.rand(len(x)) - 0.5
+    theta = t[0]
+    print("真实值:", A, B, C)
+    print("预测值:", theta)
+    y_hat = theta[0] * np.sin(theta[1] * x)
+    plt.plot(x, y, 'r-', linewidth=2, label='Actual')
+    plt.plot(x, y_hat, 'g-', linewidth=2, label='Predict')
+    plt.legend(loc='lower left')
+    plt.grid()
     plt.show()
 
+    # 8.2 使用scipy计算函数极值
+    import math
+
+    a = opt.fmin(f, 1)

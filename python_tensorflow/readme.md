@@ -37,4 +37,6 @@
 ## [深度学习与神经网络](http://wiki.jikexueyuan.com/project/neural-networks-and-deep-learning-zh-cn/) ##
 
 ## [推荐系统之算法](http://wiki.jikexueyuan.com/project/arithmetic/) ##
+
+## [tensorflow学习](https://blog.csdn.net/u012223913/article/category/6948987/) ##
  
