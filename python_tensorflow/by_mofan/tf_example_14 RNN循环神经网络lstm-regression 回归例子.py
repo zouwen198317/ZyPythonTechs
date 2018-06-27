@@ -3,19 +3,31 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
-BATCH_START = 0
-TIME_STEPS = 20
+"""
+设置 RNN 的参数 
+这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线. 
+接下来我们先确定 RNN 的各种参数(super-parameters):
+
+"""
+BATCH_START = 0  # 建立 batch data 时候的 index
+TIME_STEPS = 20  # backpropagation through time 的 time_steps
 BATCH_SIZE = 50
-INPUT_SIZE = 1
-OUTPUT_SIZE = 1
-CELL_SIZE = 10
-LR = 0.006
+INPUT_SIZE = 1  # sin 数据输入 size
+OUTPUT_SIZE = 1  # cos 数据输出 size
+CELL_SIZE = 10  # RNN 的 hidden unit size
+LR = 0.006  # learning rate
+
+"""
+数据生成
+定义一个生成数据的 get_batch function:
+"""
 
 
 def get_batch():
     global BATCH_START, TIME_STEPS
     # xs shape (50batch, 20steps)
-    xs = np.arange(BATCH_START, BATCH_START + TIME_STEPS * BATCH_SIZE).reshape((BATCH_SIZE, TIME_STEPS)) / (10 * np.pi)
+    xs = np.arange(BATCH_START, BATCH_START + TIME_STEPS * BATCH_SIZE).reshape(
+        (BATCH_SIZE, TIME_STEPS)) / (10 * np.pi)
     seq = np.sin(xs)
     res = np.cos(xs)
     BATCH_START += TIME_STEPS
@@ -23,6 +35,12 @@ def get_batch():
     # plt.show()
     # returned seq, res and xs: shape (batch, step, input)
     return [seq[:, :, np.newaxis], res[:, :, np.newaxis], xs]
+
+
+"""
+定义 LSTMRNN 的主体结构
+使用一个 class 来定义这次的 LSTMRNN 会更加方便. 第一步定义 class 中的 __init__ 传入各种参数:
+"""
 
 
 class LSTMRNN(object):
@@ -46,6 +64,10 @@ class LSTMRNN(object):
         with tf.name_scope('train'):
             self.train_op = tf.train.AdamOptimizer(LR).minimize(self.cost)
 
+    """
+    设置 add_input_layer 功能, 添加 input_layer:
+    """
+
     def add_input_layer(self):
         l_in_x = tf.reshape(self.xs, [-1, self.input_size], name='2_2D')
         # Ws(in_size,cell_size)
@@ -58,12 +80,21 @@ class LSTMRNN(object):
         # reshape l_in_y ==> (batch,n_steps,cell_size)
         self.l_in_y = tf.reshape(l_in_y, [-1, self.n_steps, self.cell_size], name='2_3D')
 
+    """
+    设置 add_cell 功能, 添加 cell, 注意这里的 self.cell_init_state, 因为我们在 training 的时候, 这个地方要特别说明.
+    """
+
     def add_cell(self):
-        lstm_cell = tf.contrib.rnn.BasicLSTMCell(self.cell_size, forget_bias=1.0, state_is_tuple=True)
+        lstm_cell = tf.contrib.rnn.BasicLSTMCell(self.cell_size, forget_bias=1.0,
+                                                 state_is_tuple=True)
         with tf.name_scope('initial_state'):
             self.cell_init_state = lstm_cell.zero_state(self.batch_size, dtype=tf.float32)
         self.cell_outputs, self.cell_final_state = tf.nn.dynamic_rnn(
             lstm_cell, self.l_in_y, initial_state=self.cell_init_state, time_major=False)
+
+    """
+    设置 add_output_layer 功能, 添加 output_layer:
+    """
 
     def add_output_layer(self):
         # shape = (batch * steps, cell_size)
@@ -103,11 +134,17 @@ class LSTMRNN(object):
         return tf.get_variable(name=name, shape=shape, initializer=initializer)
 
 
+"""
+训练 LSTMRNN
+"""
 if __name__ == '__main__':
+    # 搭建 LSTMRNN 模型
     model = LSTMRNN(TIME_STEPS, INPUT_SIZE, OUTPUT_SIZE, CELL_SIZE, BATCH_SIZE)
     sess = tf.Session()
     merged = tf.summary.merge_all()
     writer = tf.summary.FileWriter("logs", sess.graph)
+    # sess.run(tf.initialize_all_variables()) # tf 马上就要废弃这种写法
+    # 替换成下面的写法:
     if int((tf.__version__).split('.')[1]) < 12 and int((tf.__version__).split('.')[0]) < 1:
         init = tf.initialize_all_variables()
     else:
@@ -120,9 +157,11 @@ if __name__ == '__main__':
     plt.ion()
     plt.show()
 
+    # 训练 200 次
     for i in range(200):
-        seq, res, xs = get_batch()
+        seq, res, xs = get_batch()  # 提取 batch data
         if i == 0:
+            # 初始化 data
             feed_dic = {
                 model.xs: seq,
                 model.ys: res,
@@ -132,10 +171,11 @@ if __name__ == '__main__':
             feed_dic = {
                 model.xs: seq,
                 model.ys: res,
-                model.cell_init_state: state
+                model.cell_init_state: state  # 保持 state 的连续性
                 # use last state as the initial state for this run
             }
 
+        # 训练
         _, cost, state, pred = sess.run(
             [model.train_op, model.cost, model.cell_final_state, model.pred],
             feed_dict=feed_dic
@@ -147,6 +187,7 @@ if __name__ == '__main__':
         plt.draw()
         plt.pause(0.3)
 
+        # 打印 cost 结果
         if i % 20 == 0:
             print('cost: ', round(cost, 4))
             result = sess.run(merged, feed_dic)
