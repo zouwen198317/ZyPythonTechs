@@ -6,7 +6,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 # 载入数据
 # 1.路径 2.把标签转换为01格式
-mnist = input_data.read_data_sets("MNIST_data", one_hot=True)
+mnist = input_data.read_data_sets(common_header.MINIST_FILE, one_hot=True)
 
 # 数据分页，每页100条数据
 batch_size = 100

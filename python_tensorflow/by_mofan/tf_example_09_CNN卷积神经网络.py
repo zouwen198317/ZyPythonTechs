@@ -23,8 +23,7 @@ import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
 # number 1 to 10 data
-mnist = input_data.read_data_sets('../by_github_LittleHeap/03-非线性回归_简单神经网络识别MNIST样本/MNIST_data',
-                                  one_hot=True)
+mnist = input_data.read_data_sets(common_header.MINIST_FILE2, one_hot=True)
 
 
 def compute_accuracy(v_xs, v_ys):

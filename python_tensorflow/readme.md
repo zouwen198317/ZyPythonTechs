@@ -1,4 +1,5 @@
-# tensorflow项目
+# tensorflow项目 #
+
   知识学习与练习
   
   
@@ -40,3 +41,8 @@
 
 ## [tensorflow学习](https://blog.csdn.net/u012223913/article/category/6948987/) ##
  
+ 
+# 完结的项目: #
+
+-   by_mofan
+-   by_lishuchengj 

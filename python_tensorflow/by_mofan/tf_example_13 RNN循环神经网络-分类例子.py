@@ -12,7 +12,8 @@ Links:
 
 """
 设置 RNN 的参数 
-这次我们会使用 RNN 来进行分类的训练 (Classification). 会继续使用到手写数字 MNIST 数据集. 让 RNN 从每张图片的第一行像素读到最后一行, 然后再进行分类判断. 
+这次我们会使用 RNN 来进行分类的训练 (Classification). 会继续使用到手写数字 MNIST 数据集. 让 RNN 从每张图片的第一行像素读到最后一
+行, 然后再进行分类判断. 
 接下来我们导入 MNIST 数据并确定 RNN 的各种参数(hyper-parameters):
 """
 import tensorflow as tf
@@ -25,8 +26,7 @@ tf.set_random_seed(1)
 # 导入数据
 from tensorflow.examples.tutorials.mnist import input_data
 
-mnist = input_data.read_data_sets("by_github_LittleHeap/03-非线性回归_简单神经网络识别MNIST样本/MNIST_data",
-                                  one_hot=True)
+mnist = input_data.read_data_sets(common_header.MINIST_FILE2, one_hot=True)
 
 '''
 To classify images using a recurrent neural network, we consider every image
