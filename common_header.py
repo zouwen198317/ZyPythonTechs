@@ -7,3 +7,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 MINIST_FILE = "..\..\..\data\MNIST_data"
 MINIST_FILE2 = "..\..\data\MNIST_data"
+
+ROJECTOR_DIR = "..\..\..\projector\projector"
+
+ROJECTOR_DATA = "..\..\..\projector\data"
