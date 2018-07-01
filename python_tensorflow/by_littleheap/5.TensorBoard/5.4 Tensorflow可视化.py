@@ -5,7 +5,7 @@
 # @Software:   PyCharm
 # @File    :   5.4 Tensorflow可视化.py
 # @Date    :   2018/6/29
-# @Desc    :
+# @Desc    :  图片数据生成不了
 
 import common_header
 
@@ -147,7 +147,8 @@ for i in range(max_steps):
     run_metadata = tf.RunMetadata()
 
     # 把上面两个配置写入训练运行函数的options中
-    summary, _ = sess.run([merge, train_step], feed_dict={x: batch_xs, y: batch_ys}, options=run_options,
+    summary, _ = sess.run([merge, train_step], feed_dict={x: batch_xs, y: batch_ys},
+                          options=run_options,
                           run_metadata=run_metadata)
 
     # 记录参数
