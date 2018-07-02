@@ -12,3 +12,13 @@
 - sciki-leanrn  强大的数据分析建模库
 - keras 人工神经网络(可以其实深度神经网络)
 - ...
+
+
+# numpy
+功能： ndarray,多维操作,线性代数
+
+ndarray中支持的元素数据类型
+
+    bool,int/int8/16/32/64/128,uint8/16/32/64/128,float/16/32/64,complex64/128
+    
+    
