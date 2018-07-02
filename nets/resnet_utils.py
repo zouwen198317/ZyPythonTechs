@@ -25,7 +25,7 @@ More variants were introduced in:
 We can obtain different ResNet variants by changing the network depth, width,
 and form of residual unit. This module implements the infrastructure for
 building them. Concrete ResNet units and full ResNet networks are implemented in
-the accompanying resnet_v1.py and resnet_v2.py modules.
+the accompanying resnet_v1.py and resnet_v2.py models.
 
 Compared to https://github.com/KaimingHe/deep-residual-networks, in the current
 implementation we subsample the output activations in the last residual unit of
