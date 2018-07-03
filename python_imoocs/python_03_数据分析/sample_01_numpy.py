@@ -45,6 +45,15 @@ def sample_some_ndarray():
 
 '''
     numpy常用操作
+        矩阵函数	                    说明
+        np.sin(a)	        对矩阵a中每个元素取正弦,sin(x)
+        np.cos(a)	        对矩阵a中每个元素取余弦,cos(x)
+        np.tan(a)	        对矩阵a中每个元素取正切,tan(x)
+        np.arcsin(a)	    对矩阵a中每个元素取反正弦,arcsin(x)
+        np.arccos(a)	    对矩阵a中每个元素取反余弦,arccos(x)
+        np.arctan(a)	    对矩阵a中每个元素取反正切,arctan(x)
+        np.exp(a)	        对矩阵a中每个元素取指数函数,ex
+        np.sqrt(a)	        对矩阵a中每个元素开根号√x
 '''
 
 
@@ -121,8 +130,23 @@ def sample_lines_mat():
     pass
 
 
+'''
+    在其它领域的使用
+'''
+
+
+def sample_other_are_used():
+    print("Fft \n ", np.fft.fft(np.array([1, 1, 1, 1, 1, 1, 1, 1])))
+    # 相关系数:
+    print("corrcoef \n ", np.corrcoef(np.array([[1, 0, 1], [0, 2, 1]])))
+    # 一元多次函数
+    print("poly1d \n ", np.poly1d([2, 1, 3]))
+    pass
+
+
 if __name__ == '__main__':
     # sample_ndarray()
     # sample_some_ndarray()
     # sample_np_opes()
-    sample_lines_mat()
+    # sample_lines_mat()
+    sample_other_are_used()
