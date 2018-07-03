@@ -14,7 +14,7 @@
 - ...
 
 
-### numpy ###
+# numpy #
 功能： ndarray,多维操作,线性代数
 
 ndarray中支持的元素数据类型
@@ -34,20 +34,20 @@ ndarray中支持的元素数据类型
         np.exp(a)	        对矩阵a中每个元素取指数函数,ex
         np.sqrt(a)	        对矩阵a中每个元素开根号√x
         
-### matplotlib ###
+# matplotlib #
 功能： 绘图    
 
-### scipy ###
-数值计算库
+# scipy #
+## 数值计算库 ##
 
 - Integral 积分
 - Optimizer 优化器
 - Interpolation 插值
 - Linear 线性计算
 
-### pandas ###
+# pandas #
 
-数据分析库
+## 数据分析库 ##
 
 1. Series&DataFrame 数据结构
 1. Basic&Select&Set 基础操作
@@ -55,7 +55,7 @@ ndarray中支持的元素数据类型
 1. Merge&Reshape 表统计与整合(表拼接和图形整合)
 1. Time Series & Graph & Files 时间图像和文件操作
 
-#### 在使用sort函数排序的时候出现的问题： ####
+## 在使用sort函数排序的时候出现的问题： ##
 	一开始代码是这样子的：
 	
 	df.sort('realgdp',ascending=False)
@@ -69,7 +69,7 @@ ndarray中支持的元素数据类型
 	这里告诉我们：sort（）已经被sort_values 给替换掉了
 
 
-#### pandas常用操作 ####
+### pandas常用操作 ###
 
 #### 1 文件读取 ####
 
@@ -87,7 +87,7 @@ ndarray中支持的元素数据类型
 	dfjs = pd.read_json('file.json')  可以传入json格式字符串
 	dfex = pd.read_excel('file.xls', sheetname=[0,1..]) 读取多个sheet页，返回多个df的字典
      
-#### 2 数据预处理 ####
+####  2 数据预处理 #### 
 
 - df.duplicated()           返回各行是否是上一行的重复行
 - df.drop_duplicates()      删除重复行，如果需要按照列过滤，参数选填['col1', 'col2',...]
@@ -111,7 +111,7 @@ ndarray中支持的元素数据类型
 - pd.get_dummies(df['col1'], prefix='key') 某列含有有限个值，且这些值一般是字符串，例如国家，借鉴位图的思想，可以把k个国家这一列量化成k列，每列用0、1表示
 
                         
-#### 3 数据筛选 ####
+####  3 数据筛选 ####
 
 - df.columns             列名，返回Index类型的列的集合
 - df.index               索引名，返回Index类型的索引的集合
@@ -136,7 +136,7 @@ ndarray中支持的元素数据类型
 - sr.index               Series的索引，以index对象返回
 
 
-#### 4 数据运算与排序 ####
+####  4 数据运算与排序 ####
 
 - df.T                   DataFrame转置
 - df1 + df2              按照索引和列相加，得到并集，NaN填充
@@ -150,7 +150,7 @@ ndarray中支持的元素数据类型
 - df.sort_index(by=['col1', 'col2'...])  按指定列优先排序
 - df.rank()              计算排名rank值
 
-#### 5 数学统计 ####
+####  5 数学统计 ####
 
 - sr.unique             Series去重
 - sr.value_counts()     Series统计频率，并从大到小排序，DataFrame没有这个方法
@@ -180,8 +180,38 @@ ndarray中支持的元素数据类型
 - df.pivot_table(['col1', 'col2'],rows=['row1', 'row2'],aggfunc=[np.mean, np.sum],fill_value=0,            margins=True)  根据row1, row2对col1， col2做分组聚合，聚合方法可以指定多种，并用指定值替换缺省值
 - pd.crosstab(df['col1'], df['col2']) 交叉表，计算分组的频率
 
-缺失值处理两种处理方式：
+## 缺失值处理两种处理方式 ##
     A 是丢弃，B 是往里面填充一个值
     
-缺失值处理的两种方式:    
+### 缺失值处理的两种方式 ###
     固定值和差值
+
+
+
+# sciki-leanrn #
+数据挖掘建模，机器学习
+
+1. Machine Learning & Decision Tree
+1. Realizing Decison Tree
+
+
+
+## Machine Learning机器学习 ##
+因子->结果
+>结果:
+
+	不打标记->无监督学习(例如:聚类)
+	打标记  -> 监督学习
+				有限离散->分类
+				连续	   ->回归
+
+## Decision Tree决策树 ##
+监督学习 树形结构
+
+
+
+## Realizing Decison Tree ##
+
+
+
+[Scikit-learn使用总结](https://www.jianshu.com/p/516f009c0875)
