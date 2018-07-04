@@ -11,9 +11,11 @@ import common_header
 
 import pandas as pd
 
+import xlrd
+
 if __name__ == '__main__':
     print("文件操作:")
-    # t_xls_1 = pd.read_excel("./data/test.xlsx", sheetname=0, encording="gb2312")
-    t_xls_1 = pd.read_excel("./data/test.xlsx", sheetname='sheet1')
+    t_xls_1 = pd.read_excel("./data/test.xlsx", "Sheet1", encording="gb2312")
+    # t_xls_1 = pd.read_excel("./data/test.xlsx", 'Sheet1')
     print(t_xls_1)
     print('----------------------------')
