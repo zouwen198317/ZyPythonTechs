@@ -22,6 +22,7 @@ def sample_decision_tree():
     from sklearn.datasets import load_iris
 
     iris = load_iris()
+
     # print(iris)
     # print(len(iris['data']))
 
@@ -76,6 +77,23 @@ def sample_split_data():
     pass
 
 
+def export_internal_dataset():
+    from sklearn.tree import export_graphviz
+    from sklearn import tree
+    from sklearn.datasets import load_breast_cancer
+
+    from sklearn.datasets import load_iris
+
+    data = load_iris()
+    print(data.values())
+    # C:\Program Files\Python36\Lib\site-packages\sklearn\datasets\data
+    # C:\Program Files\Python36\Lib\site-packages\sklearn\datasets\data
+    # 'C:\\Program Files\\Python36\\lib\\site-packages\\sklearn\\datasets\iris.csv'
+    # 'C:\\Program Files\\Python36\\lib\\site-packages\\sklearn\\datasets\breast_cancer.csv'
+    pass
+
+
 if __name__ == '__main__':
     # sample_split_data()
-    sample_decision_tree()
+    # sample_decision_tree()
+    export_internal_dataset()

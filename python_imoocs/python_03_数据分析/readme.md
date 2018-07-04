@@ -215,3 +215,15 @@ ndarray中支持的元素数据类型
 
 
 [Scikit-learn使用总结](https://www.jianshu.com/p/516f009c0875)
+
+# keras #
+
+C:\Users\xxx\.keras\keras.json
+
+{
+    "floatx": "float32",
+    "epsilon": 1e-07,
+    "backend": "theano", # 修改为该值
+    "image_data_format": "channels_last"
+}
+

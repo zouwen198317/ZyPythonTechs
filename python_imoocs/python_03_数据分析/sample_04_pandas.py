@@ -16,8 +16,6 @@ import pandas as pd
 
 from pylab import *
 
-import xlrd
-
 
 def sample_series_dataframe():
     s = pd.Series([i * 2 for i in range(1, 11)])
@@ -270,21 +268,22 @@ def sample_merge_reshape():
 
 
 def sample_time_series_graph_files():
-    print("时间序列:")
-    time_s = pd.date_range("20170305", periods=10, freq='S')
-    print(time_s)
-    print('----------------------------')
+    # print("时间序列:")
+    # time_s = pd.date_range("20170305", periods=10, freq='S')
+    # print(time_s)
+    # print('----------------------------')
+    #
+    # print("画图:")
+    # ts = pd.Series(np.random.randn(1000), index=pd.date_range('20170301', periods=1000))
+    # ts = ts.cumsum()
+    # print(ts)
+    # ts.plot()
+    # # show()
+    # print('----------------------------')
 
-    print("画图:")
-    ts = pd.Series(np.random.randn(1000), index=pd.date_range('20170301', periods=1000))
-    ts = ts.cumsum()
-    print(ts)
-    ts.plot()
-    # show()
-    print('----------------------------')
-
+    # 这里有些问题需要解决
     print("文件操作:")
-    t_xls_1 = pd.read_excel("./data/test.xlsx", "Sheet1")
+    t_xls_1 = pd.read_excel("./data/test.xls", "Sheet1")
     print(t_xls_1)
     print('----------------------------')
     pass
