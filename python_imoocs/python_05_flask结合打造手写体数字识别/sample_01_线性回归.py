@@ -32,7 +32,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 saver = tf.train.Saver(variables)
 with tf.Session() as sess:
-    sess.run(tf.initialize_all_variables())
+    sess.run(tf.global_variables_initializer())
     for _ in range(1000):
         batch_xs, batch_ys = minist.train.next_batch(100)
         sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})
