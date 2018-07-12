@@ -3,7 +3,7 @@
 # @Contact :   xfgczzg@163.com
 # @File    :   sample_02_CNN.py
 # @Date    :   2018/7/8
-# @Desc    :
+# @Desc    :   参考代码: https://www.cnblogs.com/Ph-one/p/9074706.html
 
 import model
 import tensorflow as tf
@@ -36,7 +36,7 @@ with tf.Session() as sess:
 
     # 10000-20000
     # -----------------     使用训练集对模型进行训练     -----------------
-    for i in range(20000):
+    for i in range(5000):
         batch = mnist.train.next_batch(50)
         if i % 100 == 0:
             train_accuracy = accuracy.eval(feed_dict={x: batch[0], y_: batch[1], keep_prob: 1.0})
