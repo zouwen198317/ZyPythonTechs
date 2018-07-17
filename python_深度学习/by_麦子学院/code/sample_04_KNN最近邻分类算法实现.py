@@ -3,7 +3,7 @@
 # @Author  :   zzg
 # @Contact :   xfgczzg@163.com
 # @Software:   PyCharm
-# @File    :   sample_02_最近邻分类算法KNN.py
+# @File    :   sample_04_KNN最近邻分类算法实现.py
 # @Date    :   2018/7/13
 # @Desc    : https://blog.csdn.net/fukaixin12/article/details/79189132
 
@@ -12,6 +12,10 @@ import csv
 import random
 import math
 import operator
+
+"""
+不使用任何框架实现knn
+"""
 
 
 # 导入数据，并分成训练集和测试集

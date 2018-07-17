@@ -20,9 +20,18 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import RidgeCV
 
+''''
+不加这现行。数据集会下载失败
+'''
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
 # Load the faces datasets
 data = fetch_olivetti_faces()
 targets = data.target
+print(data)
+print(targets)
 
 data = data.images.reshpe((len(data.images), -1))
 train = data[targets < 30]
@@ -78,7 +87,6 @@ for i in range(n_face):
     sub.imgshow(true_face.reshpe(image_shape), cmap=plt.cm.gray, interpolation="nearest")
 
     for j, est in enumerate(sorted(ESTIMATORS)):
-
         completed_face = np.hstack((X_test[i], y_test_predict[est][i]))
 
         if i:

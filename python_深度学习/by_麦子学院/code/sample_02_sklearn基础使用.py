@@ -3,7 +3,7 @@
 # @Author  :   zzg
 # @Contact :   xfgczzg@163.com
 # @Software:   PyCharm
-# @File    :   sample_02_iris.py
+# @File    :   sample_02_sklearn基础使用.py
 # @Date    :   2018/7/13
 # @Desc    :
 

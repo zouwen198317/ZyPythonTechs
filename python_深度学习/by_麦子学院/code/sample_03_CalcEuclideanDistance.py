@@ -3,7 +3,7 @@
 # @Author  :   zzg
 # @Contact :   xfgczzg@163.com
 # @Software:   PyCharm
-# @File    :   sample_02_knn.py
+# @File    :   sample_03_CalcEuclideanDistance.py
 # @Date    :   2018/7/13
 # @Desc    :
 
