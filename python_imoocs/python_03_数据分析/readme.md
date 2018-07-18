@@ -37,6 +37,11 @@ ndarray中支持的元素数据类型
 # matplotlib #
 功能： 绘图    
 
+中文支持
+
+    plt.rcParams['font.sans-serif'] = [u'SimHei']
+    plt.rcParams['axes.unicode_minus'] = False
+
 # scipy #
 ## 数值计算库 ##
 
